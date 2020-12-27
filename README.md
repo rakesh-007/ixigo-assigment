@@ -6,4 +6,4 @@ This Repo Containes Following Repos to bring up Ixifo POC Infra :-
 - SharedLibrary :- Written Shared Library for Code Integration and Code Deployment to Kubernetes Server.
 - ScreenShots :- It have all the necessary Screenshots
 
-# README.md of Respective tools is inside folders.
+README.md of Respective tools is inside folders.
