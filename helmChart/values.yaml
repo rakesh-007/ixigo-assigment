@@ -1,0 +1,8 @@
+imagePullPolicy: Always
+name: ixigo-service
+registry: 036955336065.dkr.ecr.ap-south-1.amazonaws.com
+staging:
+  enabled: false
+  env : staging
+  namespace: staging
+  tag : ixigo-service-2020-01-15-16-4

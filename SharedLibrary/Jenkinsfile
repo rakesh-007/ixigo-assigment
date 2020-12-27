@@ -1,0 +1,14 @@
+@Library("ixigo-assignment@master") _
+
+def microserviceBuildDeployer = new org.ixigo.buildDeployer()
+
+ansiColor('xterm') {
+    properties ([
+        buildDiscarder(logRotator(numToKeepStr: '10')),
+        [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
+        disableConcurrentBuilds(),
+       	[$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'git@github.com:buildkite/nodejs-docker-example.git'], 
+	//pipelineTriggers([pollSCM('* * * * *')])
+    ])
+    microserviceBuildDeployer.buildStaticCode("git@github.com:buildkite/nodejs-docker-example.git", "staging", "ixigo-service", "master")
+}

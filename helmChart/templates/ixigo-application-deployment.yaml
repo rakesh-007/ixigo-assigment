@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.name }}
+  name: {{ .Values.name }}
+  namespace: {{ .Values.staging.namespace }}
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 60%
+      maxUnavailable: 20%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: {{ .Values.registry }}/{{ .Values.name }}/{{ .Values.staging.env}}:{{ .Values.staging.tag }}
+        command: ["/bin/sh","-c"]
+        args: ["npm run serve"]
+        ports:
+        - containerPort: 3000
+        readinessProbe:
+                  periodSeconds: 15
+                  timeoutSeconds: 2
+                  successThreshold: 2
+                  failureThreshold: 2
+                  httpGet:
+                    path: /health-check
+                    port: 3000
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
