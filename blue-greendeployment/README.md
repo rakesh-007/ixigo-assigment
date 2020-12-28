@@ -1,0 +1,5 @@
+- frontend-blue.yaml is the default version of the application.
+- frontend-green.yaml is the updated version of the application.
+- we have defined a label role having parameter blue/green.
+- In service you can change from blue to green.
+- Screenshots attached in the Screenshots repo. (Please check the title)
